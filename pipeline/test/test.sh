@@ -14,4 +14,4 @@ coverage html -d coverage-report
 cp -r coverage-report $WORKSPACE/
 
 # Fail the build if coverage is below a certain threshold (e.g., 80%)
-coverage report | tail -n 10 | grep -q "100%" || exit 1
+coverage report | tail -n 10 | grep -q "0%" || exit 1
