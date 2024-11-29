@@ -8,6 +8,15 @@ pipeline {
         MAIL_TO = "paramwalia1998@gmail.com"
     }
     stages {
+        stage('Setup Virtual Environment') {
+            steps {
+                script {
+                    sh '''
+                    pip install -r python-app/requirements.txt
+                    '''
+                }
+            }
+        }
         stage('Code Quality') {
             steps {
                 script {
