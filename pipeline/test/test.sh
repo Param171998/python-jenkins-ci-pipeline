@@ -2,7 +2,7 @@
 echo "Running tests and measuring code coverage..."
 
 # Run tests with coverage
-coverage run -m pytest ../../python-app/test
+coverage run -m pytest python-app/test
 
 # Generate coverage report
 coverage report

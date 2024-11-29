@@ -2,7 +2,7 @@
 echo "Running code quality checks with Pylint..."
 
 # Run Pylint on the Python source code
-pylint ../../python-app/src --max-line-length=120 --disable=C0114,C0115,C0116 > pylint_report.txt
+pylint python-app/src --max-line-length=120 --disable=C0114,C0115,C0116 > pylint_report.txt
 
 # Display Pylint report
 cat pylint_report.txt
