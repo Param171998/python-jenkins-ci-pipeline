@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Change variables accordingly
+JENKINS_URL="http://10.0.1.122:8080"
+JENKINS_USER="admin"
+JENKINS_TOKEN="113588343e78ee043e9966e0578b5a0dfb"
+JENKINS_JOB="python-jenkins-ci-cd-pipeline-develop"
+
+curl -SsLk -X POST ${JENKINS_URL}/job/${JENKINS_JOB}/build \
+        --user ${JENKINS_USER}:${JENKINS_TOKEN}
+
+exec git update-server-info
