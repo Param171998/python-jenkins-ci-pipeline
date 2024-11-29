@@ -25,4 +25,7 @@ EOF
 
 echo "Deploying Python application..."
 
-docker run -d --name ${TAG} -p 9442:9442 ${REGISTRY}:5000/$TAG
+name=$(echo "$TAG" | sed 's/[:,.]/-/g')
+
+
+docker run -d --name ${name} -p 9442:9442 ${REGISTRY}:5000/$TAG
