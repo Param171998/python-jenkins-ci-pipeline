@@ -23,11 +23,13 @@ pipeline {
         stage('Code Quality') {
             steps {
                 script {
+		    sh '''
                     echo "Running Code Quality Checks..."
                     . ${VENV_DIR}/bin/activate
                     sh 'chmod +x pipeline/quality/quality.sh'
                     sh './pipeline/quality/quality.sh'
-                }
+                    '''
+		}
             }
         }
         
