@@ -81,7 +81,7 @@ pipeline {
                 script {
                     sh '''
                     echo "Pushing Docker Image to Registry..."
-                    chmod +x pipeline/push/push.sh
+                    chmod +x pipeline/push/push.sh ${TAG}
                     ./pipeline/push/push.sh
 		    '''
                 }
