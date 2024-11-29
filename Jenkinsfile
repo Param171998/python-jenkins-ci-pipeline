@@ -52,6 +52,7 @@ pipeline {
 		    sh '''
                     echo "Running Tests..."
                     . ${VENV_DIR}/bin/activate
+		    export PYTHONPATH=python-app/src
                     chmod +x pipeline/test/test.sh
                     ./pipeline/test/test.sh
                     '''
