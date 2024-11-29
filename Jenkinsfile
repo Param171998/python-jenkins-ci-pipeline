@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    source ${VENV_DIR}/bin/activate
+                    . ${VENV_DIR}/bin/activate
                     flake8 python-app/src
                     '''
                 }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    source ${VENV_DIR}/bin/activate
+                    . ${VENV_DIR}/bin/activate
                     pytest python-app/test
                     '''
                 }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    source ${VENV_DIR}/bin/activate
+                    . ${VENV_DIR}/bin/activate
                     echo "Packaging application..."
                     # Add your Python packaging commands here
                     '''
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    source ${VENV_DIR}/bin/activate
+                    . ${VENV_DIR}/bin/activate
                     echo "Deploying application..."
                     # Add your deployment commands here
                     '''
