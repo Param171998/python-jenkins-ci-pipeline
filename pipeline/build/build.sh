@@ -9,4 +9,4 @@ else
 fi
 
 echo "Building Python application with tag: $TAG"
-docker build -t ${TAG} -f pipeline/build/Dockerfile
+docker build -t ${TAG} -f pipeline/build/Dockerfile .
