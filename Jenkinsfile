@@ -25,7 +25,7 @@ pipeline {
                 script {
                     sh '''
                     . ${VENV_DIR}/bin/activate
-                    flake8 python-app/src
+                    sh 'bash pipeline/quality/quality.sh'
                     '''
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
                 script {
                     sh '''
                     . ${VENV_DIR}/bin/activate
-                    pytest python-app/test
+                    sh 'bash pipeline/test/test.sh'
                     '''
                 }
             }
@@ -47,6 +47,7 @@ pipeline {
                     . ${VENV_DIR}/bin/activate
                     echo "Packaging application..."
                     # Add your Python packaging commands here
+		    sh 'bash pipeline/build/build.sh'
                     '''
                 }
             }
@@ -58,6 +59,7 @@ pipeline {
                     . ${VENV_DIR}/bin/activate
                     echo "Deploying application..."
                     # Add your deployment commands here
+		    sh 'bash pipeline/deploy/deploy.sh'
                     '''
                 }
             }
