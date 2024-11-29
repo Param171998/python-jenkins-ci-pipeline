@@ -6,6 +6,10 @@ pipeline {
         VENV_DIR = "test"
         MAIL_FROM = "jenkins@example.com"
         MAIL_TO = "paramwalia1998@gmail.com"
+        // IMAGE-TAG
+        NAME = "${PROJECT}"
+        VERSION = "0.1.${BUILD_NUMBER}-${ENV_TYPE}"
+        TAG = "${NAME}:${VERSION}"
     }
     stages {
         stage('Setup Virtual Environment') {
@@ -66,7 +70,7 @@ pipeline {
 	            sh '''
                     echo "Building Application..."
                     chmod +x pipeline/build/build.sh
-                    ./pipeline/build/build.sh
+                    ./pipeline/build/build.sh ${TAG}
                     '''
                 }
             }
