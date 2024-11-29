@@ -57,19 +57,19 @@ pipeline {
                     '''
                 }
             }
-            post {
-                always {
-                    echo "Publishing Test Report..."
-                    publishHTML([
-                        allowMissing: false,
-                        keepAll: true,
-                        reportDir: 'pipeline/test/coverage-report',
-                        reportFiles: 'index.html',
-                        reportName: 'Code Coverage Report'
-                    ])
-                }
-            }
-        }
+           # post {
+           #     always {
+           #         echo "Publishing Test Report..."
+           #         publishHTML([
+           #             allowMissing: false,
+           #             keepAll: true,
+           #             reportDir: 'pipeline/test/coverage-report',
+           #             reportFiles: 'index.html',
+           #             reportName: 'Code Coverage Report'
+           #         ])
+           #     }
+           # }
+       # }
         
         stage('Build') {
             steps {
