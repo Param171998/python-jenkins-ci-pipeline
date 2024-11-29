@@ -1,5 +1,5 @@
 # python-jenkins-ci-pipeline
-Python Jenkins CI-CD
+Python Jenkins CI-Cd
 
 #Currently working on Develop branch
 Installed jenkins, private registry
