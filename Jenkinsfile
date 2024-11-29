@@ -8,63 +8,80 @@ pipeline {
         MAIL_TO = "paramwalia1998@gmail.com"
     }
     stages {
-        stage('Setup Virtual Environment') {
-            steps {
-                script {
-                    sh '''
-                    python3 -m venv ${VENV_DIR}
-                    . ${VENV_DIR}/bin/activate
-                    pip install --upgrade pip
-                    pip install -r python-app/requirements.txt
-                    '''
-                }
-            }
-        }
         stage('Code Quality') {
             steps {
                 script {
-                    sh '''
-                    . ${VENV_DIR}/bin/activate
-                    sh 'bash pipeline/quality/quality.sh'
-                    '''
+                    echo "Running Code Quality Checks..."
+                    sh 'chmod +x pipeline/quality/quality.sh'
+                    sh './pipeline/quality/quality.sh'
                 }
             }
         }
-        stage('Test') {
+        
+        stage('Security Check') {
             steps {
                 script {
-                    sh '''
-                    . ${VENV_DIR}/bin/activate
-                    sh 'bash pipeline/test/test.sh'
-                    '''
+                    echo "Running Security Analysis..."
+                    sh 'chmod +x pipeline/security/security.sh'
+                    sh './pipeline/security/security.sh'
                 }
             }
         }
-        stage('Build Package') {
+        
+        stage('Testing') {
             steps {
                 script {
-                    sh '''
-                    . ${VENV_DIR}/bin/activate
-                    echo "Packaging application..."
-                    # Add your Python packaging commands here
-		    sh 'bash pipeline/build/build.sh'
-                    '''
+                    echo "Running Tests..."
+                    sh 'chmod +x pipeline/test/test.sh'
+                    sh './pipeline/test/test.sh'
+                }
+            }
+            post {
+                always {
+                    echo "Publishing Test Report..."
+                    publishHTML([
+                        allowMissing: false,
+                        keepAll: true,
+                        reportDir: 'pipeline/test/coverage-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Code Coverage Report'
+                    ])
                 }
             }
         }
+        
+        stage('Build') {
+            steps {
+                script {
+                    echo "Building Application..."
+                    sh 'chmod +x pipeline/build/build.sh'
+                    sh './pipeline/build/build.sh'
+                }
+            }
+        }
+        
+        stage('Push to Registry') {
+            steps {
+                script {
+                    echo "Pushing Docker Image to Registry..."
+                    sh 'chmod +x pipeline/push/push.sh'
+                    sh './pipeline/push/push.sh'
+                }
+            }
+        }
+        
         stage('Deploy') {
             steps {
                 script {
-                    sh '''
-                    . ${VENV_DIR}/bin/activate
-                    echo "Deploying application..."
-                    # Add your deployment commands here
-		    sh 'bash pipeline/deploy/deploy.sh'
-                    '''
+                    echo "Deploying Application..."
+                    sh 'chmod +x pipeline/deploy/deploy.sh'
+                    sh './pipeline/deploy/deploy.sh'
                 }
             }
         }
     }
+
+
     post {
         always {
             echo 'Sending status via email'
