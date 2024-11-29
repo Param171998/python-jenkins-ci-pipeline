@@ -25,4 +25,4 @@ EOF
 
 echo "Deploying Python application..."
 
-docker run -d --name python-app -p 9442:9442 ${REGISTRY}:5000/$TAG
+docker run -d --name ${TAG} -p 9442:9442 ${REGISTRY}:5000/$TAG
