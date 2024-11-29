@@ -1,6 +1,13 @@
 #!/bin/bash
 echo "Running tests and measuring code coverage..."
 
+cat <<EOF
+***************************************************
+                    Test stage
+***************************************************
+EOF
+
+
 # Run tests with coverage
 coverage run -m pytest python-app/test
 

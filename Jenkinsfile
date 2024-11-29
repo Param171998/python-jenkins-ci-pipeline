@@ -1,15 +1,25 @@
 pipeline {
+        options {
+        timestamps()
+        ansiColor('xterm')
+    }
     agent any
     environment {
+       
         ENV_TYPE = "develop"
         PROJECT = "python-app"
+       
         VENV_DIR = "test"
         MAIL_FROM = "jenkins@example.com"
         MAIL_TO = "paramwalia1998@gmail.com"
+       
         // IMAGE-TAG
         NAME = "${PROJECT}"
         VERSION = "0.1.${BUILD_NUMBER}-${ENV_TYPE}"
         TAG = "${NAME}:${VERSION}"
+
+        // REGISTRY-NAME
+	REGISTRY = "docker-registry"
     }
     stages {
         stage('Setup Virtual Environment') {
@@ -70,7 +80,7 @@ pipeline {
 	            sh '''
                     echo "Building Application..."
                     chmod +x pipeline/build/build.sh
-                    ./pipeline/build/build.sh ${TAG}
+                    ./pipeline/build/build.sh ${TAG} ${REGISTRY}
                     '''
                 }
             }
@@ -82,7 +92,7 @@ pipeline {
                     sh '''
                     echo "Pushing Docker Image to Registry..."
                     chmod +x pipeline/push/push.sh 
-                    ./pipeline/push/push.sh ${TAG}
+                    ./pipeline/push/push.sh ${TAG} ${REGISTRY}
 		    '''
                 }
             }
@@ -94,7 +104,7 @@ pipeline {
                     sh '''
                     echo "Deploying Application..."
                     chmod +x pipeline/deploy/deploy.sh
-                    ./pipeline/deploy/deploy.sh ${TAG}
+                    ./pipeline/deploy/deploy.sh ${TAG} ${REGISTRY}
                     '''
                 }
             }

@@ -1,6 +1,13 @@
 #!/bin/bash
 echo "Running security vulnerability scan..."
 
+cat <<EOF
+***************************************************
+                    Security stage
+***************************************************
+EOF
+
+
 # Check for known security vulnerabilities in requirements.txt
 safety check --file=python-app/requirements.txt --full-report
 
