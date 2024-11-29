@@ -29,3 +29,5 @@ name=$(echo "$TAG" | sed 's/[:,.]/-/g')
 
 
 docker run -d --name ${name} -p 9442:9442 ${REGISTRY}:5000/$TAG
+
+echo "Running container with name as ${name}"
