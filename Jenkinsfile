@@ -12,6 +12,9 @@ pipeline {
             steps {
                 script {
                     sh '''
+                    python3 -m venv ${VENV_DIR}
+                    . ${VENV_DIR}/bin/activate
+                    pip install --upgrade pip
                     pip install -r python-app/requirements.txt
                     '''
                 }
@@ -21,6 +24,7 @@ pipeline {
             steps {
                 script {
                     echo "Running Code Quality Checks..."
+                    . ${VENV_DIR}/bin/activate
                     sh 'chmod +x pipeline/quality/quality.sh'
                     sh './pipeline/quality/quality.sh'
                 }
@@ -31,6 +35,7 @@ pipeline {
             steps {
                 script {
                     echo "Running Security Analysis..."
+                    . ${VENV_DIR}/bin/activate
                     sh 'chmod +x pipeline/security/security.sh'
                     sh './pipeline/security/security.sh'
                 }
@@ -41,6 +46,7 @@ pipeline {
             steps {
                 script {
                     echo "Running Tests..."
+                    . ${VENV_DIR}/bin/activate
                     sh 'chmod +x pipeline/test/test.sh'
                     sh './pipeline/test/test.sh'
                 }
@@ -63,6 +69,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Application..."
+                    . ${VENV_DIR}/bin/activate
                     sh 'chmod +x pipeline/build/build.sh'
                     sh './pipeline/build/build.sh'
                 }
@@ -73,6 +80,7 @@ pipeline {
             steps {
                 script {
                     echo "Pushing Docker Image to Registry..."
+                    . ${VENV_DIR}/bin/activate
                     sh 'chmod +x pipeline/push/push.sh'
                     sh './pipeline/push/push.sh'
                 }
@@ -83,6 +91,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying Application..."
+                    . ${VENV_DIR}/bin/activate
                     sh 'chmod +x pipeline/deploy/deploy.sh'
                     sh './pipeline/deploy/deploy.sh'
                 }
