@@ -3,7 +3,7 @@ pipeline {
     environment {
         ENV_TYPE = "develop"
         PROJECT = "python-app"
-        VENV_DIR = ".venv"
+        VENV_DIR = "test"
         MAIL_FROM = "jenkins@example.com"
         MAIL_TO = "paramwalia1998@gmail.com"
     }
@@ -13,7 +13,7 @@ pipeline {
                 script {
                     sh '''
                     python3 -m venv ${VENV_DIR}
-                    source ${VENV_DIR}/bin/activate
+                    . ${VENV_DIR}/bin/activate
                     pip install --upgrade pip
                     pip install -r python-app/requirements.txt
                     '''
