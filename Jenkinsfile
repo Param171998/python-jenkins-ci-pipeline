@@ -65,7 +65,6 @@ pipeline {
                 script {
 	            sh '''
                     echo "Building Application..."
-                    . ${VENV_DIR}/bin/activate
                     chmod +x pipeline/build/build.sh
                     ./pipeline/build/build.sh
                     '''
@@ -78,7 +77,6 @@ pipeline {
                 script {
                     sh '''
                     echo "Pushing Docker Image to Registry..."
-                    . ${VENV_DIR}/bin/activate
                     chmod +x pipeline/push/push.sh
                     ./pipeline/push/push.sh
 		    '''
@@ -91,7 +89,6 @@ pipeline {
                 script {
                     sh '''
                     echo "Deploying Application..."
-                    . ${VENV_DIR}/bin/activate
                     chmod +x pipeline/deploy/deploy.sh
                     ./pipeline/deploy/deploy.sh
                     '''
