@@ -94,7 +94,7 @@ pipeline {
                     sh '''
                     echo "Deploying Application..."
                     chmod +x pipeline/deploy/deploy.sh
-                    ./pipeline/deploy/deploy.sh
+                    ./pipeline/deploy/deploy.sh ${TAG}
                     '''
                 }
             }
