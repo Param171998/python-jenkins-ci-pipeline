@@ -26,8 +26,8 @@ pipeline {
 		    sh '''
                     echo "Running Code Quality Checks..."
                     . ${VENV_DIR}/bin/activate
-                    sh 'chmod +x pipeline/quality/quality.sh'
-                    sh './pipeline/quality/quality.sh'
+                    chmod +x pipeline/quality/quality.sh
+                    ./pipeline/quality/quality.sh
                     '''
 		}
             }
@@ -36,10 +36,12 @@ pipeline {
         stage('Security Check') {
             steps {
                 script {
+		    sh '''
                     echo "Running Security Analysis..."
                     . ${VENV_DIR}/bin/activate
-                    sh 'chmod +x pipeline/security/security.sh'
-                    sh './pipeline/security/security.sh'
+                    chmod +x pipeline/security/security.sh
+                    ./pipeline/security/security.sh
+                    '''
                 }
             }
         }
@@ -47,10 +49,12 @@ pipeline {
         stage('Testing') {
             steps {
                 script {
+		    sh '''
                     echo "Running Tests..."
                     . ${VENV_DIR}/bin/activate
-                    sh 'chmod +x pipeline/test/test.sh'
-                    sh './pipeline/test/test.sh'
+                    chmod +x pipeline/test/test.sh
+                    ./pipeline/test/test.sh
+                    '''
                 }
             }
             post {
@@ -70,10 +74,12 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+	            sh '''
                     echo "Building Application..."
                     . ${VENV_DIR}/bin/activate
-                    sh 'chmod +x pipeline/build/build.sh'
-                    sh './pipeline/build/build.sh'
+                    chmod +x pipeline/build/build.sh
+                    ./pipeline/build/build.sh
+                    '''
                 }
             }
         }
@@ -81,10 +87,12 @@ pipeline {
         stage('Push to Registry') {
             steps {
                 script {
+                    sh '''
                     echo "Pushing Docker Image to Registry..."
                     . ${VENV_DIR}/bin/activate
-                    sh 'chmod +x pipeline/push/push.sh'
-                    sh './pipeline/push/push.sh'
+                    chmod +x pipeline/push/push.sh
+                    ./pipeline/push/push.sh
+		    '''
                 }
             }
         }
@@ -92,10 +100,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    sh '''
                     echo "Deploying Application..."
                     . ${VENV_DIR}/bin/activate
-                    sh 'chmod +x pipeline/deploy/deploy.sh'
-                    sh './pipeline/deploy/deploy.sh'
+                    chmod +x pipeline/deploy/deploy.sh
+                    ./pipeline/deploy/deploy.sh
+                    '''
                 }
             }
         }
