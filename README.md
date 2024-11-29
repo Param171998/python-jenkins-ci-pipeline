@@ -5,7 +5,7 @@ Python Jenkins CI-CD
 Installed jenkins, private registry
 
 # Directory structure
-'''
+```
 python-jenkins-ci-pipeline/
 ├── Dockerfile
 ├── Jenkinsfile
@@ -42,6 +42,6 @@ python-jenkins-ci-pipeline/
         ├── __pycache__
         │   └── test_app.cpython-310-pytest-8.3.3.pyc
         └── test_app.py
-'''
+```
 # Currently work is in process in develop branch 
 # When all testing will be done then will be merged with main branch
