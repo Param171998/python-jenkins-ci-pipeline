@@ -57,6 +57,7 @@ pipeline {
                     '''
                 }
             }
+          }
            # post {
            #     always {
            #         echo "Publishing Test Report..."
