@@ -1,0 +1,944 @@
+Started by user admin-devops
+Obtained Jenkinsfile from git https://github.com/Param171998/python-jenkins-ci-pipeline.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/Param171998/python-jenkins-ci-pipeline.git
+ > git init /var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master # timeout=10
+Fetching upstream changes from https://github.com/Param171998/python-jenkins-ci-pipeline.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/Param171998/python-jenkins-ci-pipeline.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/Param171998/python-jenkins-ci-pipeline.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 0ba1b0e47a11bc5c70a9b1e95dfe6bd821f80360 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0ba1b0e47a11bc5c70a9b1e95dfe6bd821f80360 # timeout=10
+Commit message: "updated jenkinsfile for prod setup"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Setup Virtual Environment)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2024-11-30T03:29:19.286Z] + python3 -m venv test
+[2024-11-30T03:29:21.769Z] + . test/bin/activate
+[2024-11-30T03:29:21.769Z] + deactivate nondestructive
+[2024-11-30T03:29:21.769Z] + [ -n  ]
+[2024-11-30T03:29:21.769Z] + [ -n  ]
+[2024-11-30T03:29:21.769Z] + [ -n  -o -n  ]
+[2024-11-30T03:29:21.769Z] + [ -n  ]
+[2024-11-30T03:29:21.769Z] + unset VIRTUAL_ENV
+[2024-11-30T03:29:21.769Z] + unset VIRTUAL_ENV_PROMPT
+[2024-11-30T03:29:21.769Z] + [ ! nondestructive = nondestructive ]
+[2024-11-30T03:29:21.769Z] + VIRTUAL_ENV=/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/test
+[2024-11-30T03:29:21.769Z] + export VIRTUAL_ENV
+[2024-11-30T03:29:21.769Z] + _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+[2024-11-30T03:29:21.769Z] + PATH=/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/test/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+[2024-11-30T03:29:21.769Z] + export PATH
+[2024-11-30T03:29:21.769Z] + [ -n  ]
+[2024-11-30T03:29:21.769Z] + [ -z  ]
+[2024-11-30T03:29:21.769Z] + _OLD_VIRTUAL_PS1=$ 
+[2024-11-30T03:29:21.769Z] + PS1=(test) $ 
+[2024-11-30T03:29:21.769Z] + export PS1
+[2024-11-30T03:29:21.769Z] + VIRTUAL_ENV_PROMPT=(test) 
+[2024-11-30T03:29:21.769Z] + export VIRTUAL_ENV_PROMPT
+[2024-11-30T03:29:21.769Z] + [ -n  -o -n  ]
+[2024-11-30T03:29:21.769Z] + pip install --upgrade pip
+[2024-11-30T03:29:21.769Z] Requirement already satisfied: pip in ./test/lib/python3.10/site-packages (22.0.2)
+[2024-11-30T03:29:22.019Z] Collecting pip
+[2024-11-30T03:29:22.019Z]   Using cached pip-24.3.1-py3-none-any.whl (1.8 MB)
+[2024-11-30T03:29:22.019Z] Installing collected packages: pip
+[2024-11-30T03:29:22.019Z]   Attempting uninstall: pip
+[2024-11-30T03:29:22.019Z]     Found existing installation: pip 22.0.2
+[2024-11-30T03:29:22.270Z]     Uninstalling pip-22.0.2:
+[2024-11-30T03:29:22.270Z]       Successfully uninstalled pip-22.0.2
+[2024-11-30T03:29:22.820Z] Successfully installed pip-24.3.1
+[2024-11-30T03:29:22.820Z] + pip install -r python-app/requirements.txt
+[2024-11-30T03:29:23.371Z] Collecting flake8 (from -r python-app/requirements.txt (line 1))
+[2024-11-30T03:29:23.371Z]   Using cached flake8-7.1.1-py2.py3-none-any.whl.metadata (3.8 kB)
+[2024-11-30T03:29:23.371Z] Collecting pytest (from -r python-app/requirements.txt (line 2))
+[2024-11-30T03:29:23.371Z]   Using cached pytest-8.3.3-py3-none-any.whl.metadata (7.5 kB)
+[2024-11-30T03:29:23.621Z] Collecting coverage (from -r python-app/requirements.txt (line 3))
+[2024-11-30T03:29:23.621Z]   Using cached coverage-7.6.8-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.2 kB)
+[2024-11-30T03:29:23.871Z] Collecting lizard (from -r python-app/requirements.txt (line 4))
+[2024-11-30T03:29:23.871Z]   Using cached lizard-1.17.13-py2.py3-none-any.whl.metadata (15 kB)
+[2024-11-30T03:29:24.122Z] Collecting safety (from -r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:24.122Z]   Using cached safety-3.2.11-py3-none-any.whl.metadata (39 kB)
+[2024-11-30T03:29:24.122Z] Collecting pylint (from -r python-app/requirements.txt (line 6))
+[2024-11-30T03:29:24.122Z]   Using cached pylint-3.3.1-py3-none-any.whl.metadata (12 kB)
+[2024-11-30T03:29:24.122Z] Collecting mccabe<0.8.0,>=0.7.0 (from flake8->-r python-app/requirements.txt (line 1))
+[2024-11-30T03:29:24.122Z]   Using cached mccabe-0.7.0-py2.py3-none-any.whl.metadata (5.0 kB)
+[2024-11-30T03:29:24.122Z] Collecting pycodestyle<2.13.0,>=2.12.0 (from flake8->-r python-app/requirements.txt (line 1))
+[2024-11-30T03:29:24.122Z]   Using cached pycodestyle-2.12.1-py2.py3-none-any.whl.metadata (4.5 kB)
+[2024-11-30T03:29:24.122Z] Collecting pyflakes<3.3.0,>=3.2.0 (from flake8->-r python-app/requirements.txt (line 1))
+[2024-11-30T03:29:24.122Z]   Using cached pyflakes-3.2.0-py2.py3-none-any.whl.metadata (3.5 kB)
+[2024-11-30T03:29:24.122Z] Collecting iniconfig (from pytest->-r python-app/requirements.txt (line 2))
+[2024-11-30T03:29:24.122Z]   Using cached iniconfig-2.0.0-py3-none-any.whl.metadata (2.6 kB)
+[2024-11-30T03:29:24.122Z] Collecting packaging (from pytest->-r python-app/requirements.txt (line 2))
+[2024-11-30T03:29:24.122Z]   Using cached packaging-24.2-py3-none-any.whl.metadata (3.2 kB)
+[2024-11-30T03:29:24.372Z] Collecting pluggy<2,>=1.5 (from pytest->-r python-app/requirements.txt (line 2))
+[2024-11-30T03:29:24.372Z]   Using cached pluggy-1.5.0-py3-none-any.whl.metadata (4.8 kB)
+[2024-11-30T03:29:24.372Z] Collecting exceptiongroup>=1.0.0rc8 (from pytest->-r python-app/requirements.txt (line 2))
+[2024-11-30T03:29:24.372Z]   Using cached exceptiongroup-1.2.2-py3-none-any.whl.metadata (6.6 kB)
+[2024-11-30T03:29:24.372Z] Collecting tomli>=1 (from pytest->-r python-app/requirements.txt (line 2))
+[2024-11-30T03:29:24.372Z]   Using cached tomli-2.2.1-py3-none-any.whl.metadata (10 kB)
+[2024-11-30T03:29:24.372Z] Collecting pygments (from lizard->-r python-app/requirements.txt (line 4))
+[2024-11-30T03:29:24.372Z]   Using cached pygments-2.18.0-py3-none-any.whl.metadata (2.5 kB)
+[2024-11-30T03:29:24.622Z] Collecting setuptools>=65.5.1 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:24.622Z]   Using cached setuptools-75.6.0-py3-none-any.whl.metadata (6.7 kB)
+[2024-11-30T03:29:24.622Z] Collecting Click>=8.0.2 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:24.622Z]   Using cached click-8.1.7-py3-none-any.whl.metadata (3.0 kB)
+[2024-11-30T03:29:24.622Z] Collecting urllib3>=1.26.5 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:24.622Z]   Using cached urllib3-2.2.3-py3-none-any.whl.metadata (6.5 kB)
+[2024-11-30T03:29:24.622Z] Collecting requests (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:24.622Z]   Using cached requests-2.32.3-py3-none-any.whl.metadata (4.6 kB)
+[2024-11-30T03:29:24.873Z] Collecting dparse>=0.6.4 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:24.873Z]   Using cached dparse-0.6.4-py3-none-any.whl.metadata (5.5 kB)
+[2024-11-30T03:29:25.123Z] Collecting ruamel.yaml>=0.17.21 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.123Z]   Using cached ruamel.yaml-0.18.6-py3-none-any.whl.metadata (23 kB)
+[2024-11-30T03:29:25.123Z] Collecting jinja2>=3.1.0 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.123Z]   Using cached jinja2-3.1.4-py3-none-any.whl.metadata (2.6 kB)
+[2024-11-30T03:29:25.123Z] Collecting marshmallow>=3.15.0 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.123Z]   Using cached marshmallow-3.23.1-py3-none-any.whl.metadata (7.5 kB)
+[2024-11-30T03:29:25.123Z] Collecting Authlib>=1.2.0 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.123Z]   Using cached Authlib-1.3.2-py2.py3-none-any.whl.metadata (3.9 kB)
+[2024-11-30T03:29:25.123Z] Collecting rich (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.123Z]   Using cached rich-13.9.4-py3-none-any.whl.metadata (18 kB)
+[2024-11-30T03:29:25.373Z] Collecting typer (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.373Z]   Using cached typer-0.14.0-py3-none-any.whl.metadata (15 kB)
+[2024-11-30T03:29:25.373Z] Collecting pydantic>=1.10.12 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.373Z]   Using cached pydantic-2.10.2-py3-none-any.whl.metadata (170 kB)
+[2024-11-30T03:29:25.373Z] Collecting safety-schemas>=0.0.8 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.373Z]   Using cached safety_schemas-0.0.9-py3-none-any.whl.metadata (1.2 kB)
+[2024-11-30T03:29:25.373Z] Collecting typing-extensions>=4.7.1 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.373Z]   Using cached typing_extensions-4.12.2-py3-none-any.whl.metadata (3.0 kB)
+[2024-11-30T03:29:25.624Z] Collecting filelock~=3.12.2 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.624Z]   Using cached filelock-3.12.4-py3-none-any.whl.metadata (2.8 kB)
+[2024-11-30T03:29:25.624Z] Collecting psutil~=6.0.0 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:25.624Z]   Using cached psutil-6.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (21 kB)
+[2024-11-30T03:29:25.624Z] Collecting platformdirs>=2.2.0 (from pylint->-r python-app/requirements.txt (line 6))
+[2024-11-30T03:29:25.624Z]   Using cached platformdirs-4.3.6-py3-none-any.whl.metadata (11 kB)
+[2024-11-30T03:29:25.624Z] Collecting astroid<=3.4.0-dev0,>=3.3.4 (from pylint->-r python-app/requirements.txt (line 6))
+[2024-11-30T03:29:25.624Z]   Using cached astroid-3.3.5-py3-none-any.whl.metadata (4.5 kB)
+[2024-11-30T03:29:25.874Z] Collecting isort!=5.13.0,<6,>=4.2.5 (from pylint->-r python-app/requirements.txt (line 6))
+[2024-11-30T03:29:25.874Z]   Using cached isort-5.13.2-py3-none-any.whl.metadata (12 kB)
+[2024-11-30T03:29:25.874Z] Collecting tomlkit>=0.10.1 (from pylint->-r python-app/requirements.txt (line 6))
+[2024-11-30T03:29:25.874Z]   Using cached tomlkit-0.13.2-py3-none-any.whl.metadata (2.7 kB)
+[2024-11-30T03:29:25.874Z] Collecting dill>=0.2 (from pylint->-r python-app/requirements.txt (line 6))
+[2024-11-30T03:29:25.874Z]   Using cached dill-0.3.9-py3-none-any.whl.metadata (10 kB)
+[2024-11-30T03:29:26.124Z] Collecting cryptography (from Authlib>=1.2.0->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:26.124Z]   Using cached cryptography-44.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+[2024-11-30T03:29:26.124Z] Collecting MarkupSafe>=2.0 (from jinja2>=3.1.0->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:26.124Z]   Using cached MarkupSafe-3.0.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+[2024-11-30T03:29:26.124Z] Collecting annotated-types>=0.6.0 (from pydantic>=1.10.12->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:26.124Z]   Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+[2024-11-30T03:29:27.035Z] Collecting pydantic-core==2.27.1 (from pydantic>=1.10.12->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached pydantic_core-2.27.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+[2024-11-30T03:29:27.035Z] Collecting ruamel.yaml.clib>=0.2.7 (from ruamel.yaml>=0.17.21->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached ruamel.yaml.clib-0.2.12-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.7 kB)
+[2024-11-30T03:29:27.035Z] Collecting pydantic>=1.10.12 (from safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached pydantic-2.9.2-py3-none-any.whl.metadata (149 kB)
+[2024-11-30T03:29:27.035Z] Collecting pydantic-core==2.23.4 (from pydantic>=1.10.12->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached pydantic_core-2.23.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+[2024-11-30T03:29:27.035Z] Collecting charset-normalizer<4,>=2 (from requests->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached charset_normalizer-3.4.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (34 kB)
+[2024-11-30T03:29:27.035Z] Collecting idna<4,>=2.5 (from requests->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)
+[2024-11-30T03:29:27.035Z] Collecting certifi>=2017.4.17 (from requests->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached certifi-2024.8.30-py3-none-any.whl.metadata (2.2 kB)
+[2024-11-30T03:29:27.035Z] Collecting markdown-it-py>=2.2.0 (from rich->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
+[2024-11-30T03:29:27.035Z] Collecting shellingham>=1.3.0 (from typer->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.035Z]   Using cached shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+[2024-11-30T03:29:27.285Z] Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.285Z]   Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+[2024-11-30T03:29:27.285Z] Collecting cffi>=1.12 (from cryptography->Authlib>=1.2.0->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.285Z]   Using cached cffi-1.17.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+[2024-11-30T03:29:27.285Z] Collecting pycparser (from cffi>=1.12->cryptography->Authlib>=1.2.0->safety->-r python-app/requirements.txt (line 5))
+[2024-11-30T03:29:27.285Z]   Using cached pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
+[2024-11-30T03:29:27.285Z] Using cached flake8-7.1.1-py2.py3-none-any.whl (57 kB)
+[2024-11-30T03:29:27.285Z] Using cached pytest-8.3.3-py3-none-any.whl (342 kB)
+[2024-11-30T03:29:27.285Z] Using cached coverage-7.6.8-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (234 kB)
+[2024-11-30T03:29:27.285Z] Using cached lizard-1.17.13-py2.py3-none-any.whl (68 kB)
+[2024-11-30T03:29:27.285Z] Using cached safety-3.2.11-py3-none-any.whl (176 kB)
+[2024-11-30T03:29:27.285Z] Using cached pylint-3.3.1-py3-none-any.whl (521 kB)
+[2024-11-30T03:29:27.285Z] Using cached astroid-3.3.5-py3-none-any.whl (274 kB)
+[2024-11-30T03:29:27.285Z] Using cached Authlib-1.3.2-py2.py3-none-any.whl (225 kB)
+[2024-11-30T03:29:27.285Z] Using cached click-8.1.7-py3-none-any.whl (97 kB)
+[2024-11-30T03:29:27.285Z] Using cached dill-0.3.9-py3-none-any.whl (119 kB)
+[2024-11-30T03:29:27.285Z] Using cached dparse-0.6.4-py3-none-any.whl (11 kB)
+[2024-11-30T03:29:27.285Z] Using cached exceptiongroup-1.2.2-py3-none-any.whl (16 kB)
+[2024-11-30T03:29:27.285Z] Using cached filelock-3.12.4-py3-none-any.whl (11 kB)
+[2024-11-30T03:29:27.285Z] Using cached isort-5.13.2-py3-none-any.whl (92 kB)
+[2024-11-30T03:29:27.285Z] Using cached jinja2-3.1.4-py3-none-any.whl (133 kB)
+[2024-11-30T03:29:27.285Z] Using cached marshmallow-3.23.1-py3-none-any.whl (49 kB)
+[2024-11-30T03:29:27.285Z] Using cached mccabe-0.7.0-py2.py3-none-any.whl (7.3 kB)
+[2024-11-30T03:29:27.285Z] Using cached packaging-24.2-py3-none-any.whl (65 kB)
+[2024-11-30T03:29:27.285Z] Using cached platformdirs-4.3.6-py3-none-any.whl (18 kB)
+[2024-11-30T03:29:27.285Z] Using cached pluggy-1.5.0-py3-none-any.whl (20 kB)
+[2024-11-30T03:29:27.285Z] Using cached psutil-6.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (290 kB)
+[2024-11-30T03:29:27.285Z] Using cached pycodestyle-2.12.1-py2.py3-none-any.whl (31 kB)
+[2024-11-30T03:29:27.285Z] Using cached pyflakes-3.2.0-py2.py3-none-any.whl (62 kB)
+[2024-11-30T03:29:27.285Z] Using cached ruamel.yaml-0.18.6-py3-none-any.whl (117 kB)
+[2024-11-30T03:29:27.285Z] Using cached safety_schemas-0.0.9-py3-none-any.whl (28 kB)
+[2024-11-30T03:29:27.285Z] Using cached pydantic-2.9.2-py3-none-any.whl (434 kB)
+[2024-11-30T03:29:27.285Z] Using cached pydantic_core-2.23.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+[2024-11-30T03:29:27.285Z] Using cached setuptools-75.6.0-py3-none-any.whl (1.2 MB)
+[2024-11-30T03:29:27.285Z] Using cached tomli-2.2.1-py3-none-any.whl (14 kB)
+[2024-11-30T03:29:27.285Z] Using cached tomlkit-0.13.2-py3-none-any.whl (37 kB)
+[2024-11-30T03:29:27.285Z] Using cached typing_extensions-4.12.2-py3-none-any.whl (37 kB)
+[2024-11-30T03:29:27.285Z] Using cached urllib3-2.2.3-py3-none-any.whl (126 kB)
+[2024-11-30T03:29:27.285Z] Using cached iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+[2024-11-30T03:29:27.285Z] Using cached pygments-2.18.0-py3-none-any.whl (1.2 MB)
+[2024-11-30T03:29:27.285Z] Using cached requests-2.32.3-py3-none-any.whl (64 kB)
+[2024-11-30T03:29:27.285Z] Using cached rich-13.9.4-py3-none-any.whl (242 kB)
+[2024-11-30T03:29:27.285Z] Using cached typer-0.14.0-py3-none-any.whl (44 kB)
+[2024-11-30T03:29:27.285Z] Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+[2024-11-30T03:29:27.285Z] Using cached certifi-2024.8.30-py3-none-any.whl (167 kB)
+[2024-11-30T03:29:27.285Z] Using cached charset_normalizer-3.4.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (144 kB)
+[2024-11-30T03:29:27.285Z] Using cached idna-3.10-py3-none-any.whl (70 kB)
+[2024-11-30T03:29:27.285Z] Using cached markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+[2024-11-30T03:29:27.285Z] Using cached MarkupSafe-3.0.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (20 kB)
+[2024-11-30T03:29:27.286Z] Using cached ruamel.yaml.clib-0.2.12-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (722 kB)
+[2024-11-30T03:29:27.286Z] Using cached shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+[2024-11-30T03:29:27.286Z] Using cached cryptography-44.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (4.2 MB)
+[2024-11-30T03:29:27.286Z] Using cached cffi-1.17.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (446 kB)
+[2024-11-30T03:29:27.286Z] Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+[2024-11-30T03:29:27.286Z] Using cached pycparser-2.22-py3-none-any.whl (117 kB)
+[2024-11-30T03:29:27.536Z] Installing collected packages: urllib3, typing-extensions, tomlkit, tomli, shellingham, setuptools, ruamel.yaml.clib, pygments, pyflakes, pycparser, pycodestyle, psutil, pluggy, platformdirs, packaging, mdurl, mccabe, MarkupSafe, isort, iniconfig, idna, filelock, exceptiongroup, dill, coverage, Click, charset-normalizer, certifi, annotated-types, ruamel.yaml, requests, pytest, pydantic-core, marshmallow, markdown-it-py, lizard, jinja2, flake8, dparse, cffi, astroid, rich, pylint, pydantic, cryptography, typer, safety-schemas, Authlib, safety
+[2024-11-30T03:29:27.536Z]   Attempting uninstall: setuptools
+[2024-11-30T03:29:27.536Z]     Found existing installation: setuptools 59.6.0
+[2024-11-30T03:29:27.786Z]     Uninstalling setuptools-59.6.0:
+[2024-11-30T03:29:27.786Z]       Successfully uninstalled setuptools-59.6.0
+[2024-11-30T03:29:31.014Z] Successfully installed Authlib-1.3.2 Click-8.1.7 MarkupSafe-3.0.2 annotated-types-0.7.0 astroid-3.3.5 certifi-2024.8.30 cffi-1.17.1 charset-normalizer-3.4.0 coverage-7.6.8 cryptography-44.0.0 dill-0.3.9 dparse-0.6.4 exceptiongroup-1.2.2 filelock-3.12.4 flake8-7.1.1 idna-3.10 iniconfig-2.0.0 isort-5.13.2 jinja2-3.1.4 lizard-1.17.13 markdown-it-py-3.0.0 marshmallow-3.23.1 mccabe-0.7.0 mdurl-0.1.2 packaging-24.2 platformdirs-4.3.6 pluggy-1.5.0 psutil-6.0.0 pycodestyle-2.12.1 pycparser-2.22 pydantic-2.9.2 pydantic-core-2.23.4 pyflakes-3.2.0 pygments-2.18.0 pylint-3.3.1 pytest-8.3.3 requests-2.32.3 rich-13.9.4 ruamel.yaml-0.18.6 ruamel.yaml.clib-0.2.12 safety-3.2.11 safety-schemas-0.0.9 setuptools-75.6.0 shellingham-1.5.4 tomli-2.2.1 tomlkit-0.13.2 typer-0.14.0 typing-extensions-4.12.2 urllib3-2.2.3
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code Quality)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2024-11-30T03:29:31.956Z] + echo Running Code Quality Checks...
+[2024-11-30T03:29:31.956Z] Running Code Quality Checks...
+[2024-11-30T03:29:31.956Z] + . test/bin/activate
+[2024-11-30T03:29:31.956Z] + deactivate nondestructive
+[2024-11-30T03:29:31.956Z] + [ -n  ]
+[2024-11-30T03:29:31.956Z] + [ -n  ]
+[2024-11-30T03:29:31.956Z] + [ -n  -o -n  ]
+[2024-11-30T03:29:31.956Z] + [ -n  ]
+[2024-11-30T03:29:31.956Z] + unset VIRTUAL_ENV
+[2024-11-30T03:29:31.956Z] + unset VIRTUAL_ENV_PROMPT
+[2024-11-30T03:29:31.956Z] + [ ! nondestructive = nondestructive ]
+[2024-11-30T03:29:31.956Z] + VIRTUAL_ENV=/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/test
+[2024-11-30T03:29:31.956Z] + export VIRTUAL_ENV
+[2024-11-30T03:29:31.956Z] + _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+[2024-11-30T03:29:31.956Z] + PATH=/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/test/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+[2024-11-30T03:29:31.956Z] + export PATH
+[2024-11-30T03:29:31.956Z] + [ -n  ]
+[2024-11-30T03:29:31.956Z] + [ -z  ]
+[2024-11-30T03:29:31.956Z] + _OLD_VIRTUAL_PS1=$ 
+[2024-11-30T03:29:31.956Z] + PS1=(test) $ 
+[2024-11-30T03:29:31.956Z] + export PS1
+[2024-11-30T03:29:31.956Z] + VIRTUAL_ENV_PROMPT=(test) 
+[2024-11-30T03:29:31.956Z] + export VIRTUAL_ENV_PROMPT
+[2024-11-30T03:29:31.956Z] + [ -n  -o -n  ]
+[2024-11-30T03:29:31.956Z] + chmod +x pipeline/quality/quality.sh
+[2024-11-30T03:29:31.956Z] + ./pipeline/quality/quality.sh
+[2024-11-30T03:29:31.956Z] Running code quality checks with Pylint...
+[2024-11-30T03:29:31.956Z] ***************************************************
+[2024-11-30T03:29:31.956Z]                     Quality stage
+[2024-11-30T03:29:31.956Z] ***************************************************
+[2024-11-30T03:29:32.206Z] 
+[2024-11-30T03:29:32.206Z] --------------------------------------------------------------------
+[2024-11-30T03:29:32.206Z] Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
+[2024-11-30T03:29:32.206Z] 
+[2024-11-30T03:29:32.206Z] Pylint quality gate passed.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Security Check)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2024-11-30T03:29:32.608Z] + echo Running Security Analysis...
+[2024-11-30T03:29:32.608Z] Running Security Analysis...
+[2024-11-30T03:29:32.608Z] + . test/bin/activate
+[2024-11-30T03:29:32.608Z] + deactivate nondestructive
+[2024-11-30T03:29:32.608Z] + [ -n  ]
+[2024-11-30T03:29:32.608Z] + [ -n  ]
+[2024-11-30T03:29:32.608Z] + [ -n  -o -n  ]
+[2024-11-30T03:29:32.608Z] + [ -n  ]
+[2024-11-30T03:29:32.608Z] + unset VIRTUAL_ENV
+[2024-11-30T03:29:32.608Z] + unset VIRTUAL_ENV_PROMPT
+[2024-11-30T03:29:32.608Z] + [ ! nondestructive = nondestructive ]
+[2024-11-30T03:29:32.608Z] + VIRTUAL_ENV=/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/test
+[2024-11-30T03:29:32.608Z] + export VIRTUAL_ENV
+[2024-11-30T03:29:32.608Z] + _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+[2024-11-30T03:29:32.608Z] + PATH=/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/test/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+[2024-11-30T03:29:32.608Z] + export PATH
+[2024-11-30T03:29:32.608Z] + [ -n  ]
+[2024-11-30T03:29:32.608Z] + [ -z  ]
+[2024-11-30T03:29:32.608Z] + _OLD_VIRTUAL_PS1=$ 
+[2024-11-30T03:29:32.608Z] + PS1=(test) $ 
+[2024-11-30T03:29:32.608Z] + export PS1
+[2024-11-30T03:29:32.608Z] + VIRTUAL_ENV_PROMPT=(test) 
+[2024-11-30T03:29:32.608Z] + export VIRTUAL_ENV_PROMPT
+[2024-11-30T03:29:32.608Z] + [ -n  -o -n  ]
+[2024-11-30T03:29:32.608Z] + chmod +x pipeline/security/security.sh
+[2024-11-30T03:29:32.608Z] + ./pipeline/security/security.sh
+[2024-11-30T03:29:32.608Z] Running security vulnerability scan...
+[2024-11-30T03:29:32.608Z] ***************************************************
+[2024-11-30T03:29:32.608Z]                     Security stage
+[2024-11-30T03:29:32.608Z] ***************************************************
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] [33m[1m+===========================================================================================================================================================================================+[0m
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] [31m[1mDEPRECATED: [0m[33m[1mthis command (`check`) has been DEPRECATED, and will be unsupported beyond 01 June 2024.[0m
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] [32mWe highly encourage switching to the new [0m[32m[1m`scan`[0m[32m command which is easier to use, more powerful, and can be set up to mimic the deprecated command if required.[0m
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] [33m[1m+===========================================================================================================================================================================================+[0m
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:33.951Z] 
+[2024-11-30T03:29:34.862Z] +==============================================================================+
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z]                                /$$$$$$            /$$
+[2024-11-30T03:29:34.862Z]                               /$$__  $$          | $$
+[2024-11-30T03:29:34.862Z]            /$$$$$$$  /$$$$$$ | $$  \__//$$$$$$  /$$$$$$   /$$   /$$
+[2024-11-30T03:29:34.862Z]           /$$_____/ |____  $$| $$$$   /$$__  $$|_  $$_/  | $$  | $$
+[2024-11-30T03:29:34.862Z]          |  $$$$$$   /$$$$$$$| $$_/  | $$$$$$$$  | $$    | $$  | $$
+[2024-11-30T03:29:34.862Z]           \____  $$ /$$__  $$| $$    | $$_____/  | $$ /$$| $$  | $$
+[2024-11-30T03:29:34.862Z]           /$$$$$$$/|  $$$$$$$| $$    |  $$$$$$$  |  $$$$/|  $$$$$$$
+[2024-11-30T03:29:34.862Z]          |_______/  \_______/|__/     \_______/   \___/   \____  $$
+[2024-11-30T03:29:34.862Z]                                                           /$$  | $$
+[2024-11-30T03:29:34.862Z]                                                          |  $$$$$$/
+[2024-11-30T03:29:34.862Z]   by safetycli.com                                        \______/
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] +==============================================================================+
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z]  [1mANNOUNCEMENTS[0m 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] [33m  * Warning: flake8, pytest, coverage, lizard, safety and pylint are unpinned.[0m 
+[2024-11-30T03:29:34.862Z] [33m    Safety by default does not report on potential vulnerabilities in unpinned[0m 
+[2024-11-30T03:29:34.862Z] [33m    packages. It is recommended to pin your dependencies unless this is a[0m 
+[2024-11-30T03:29:34.862Z] [33m    library meant for distribution. To learn more about reporting these,[0m 
+[2024-11-30T03:29:34.862Z] [33m    specifier range handling, and options for scanning unpinned packages visit[0m 
+[2024-11-30T03:29:34.862Z] [33m    https://docs.pyup.io/docs/safety-range-specs[0m 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] +==============================================================================+
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z]  [1mREPORT[0m 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z]   Safety [1mv3.2.11[0m is scanning for [1mVulnerabilities[0m[1m...[0m
+[2024-11-30T03:29:34.862Z] [1m  Scanning dependencies[0m in your [1mfiles:[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z]   -> python-app/requirements.txt
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z]   Using [1mopen-source vulnerability database[0m
+[2024-11-30T03:29:34.862Z] [1m  Found and scanned 6 packages[0m
+[2024-11-30T03:29:34.862Z]   Timestamp [1m2024-11-30 03:29:34[0m
+[2024-11-30T03:29:34.862Z] [1m  0[0m[1m vulnerabilities reported[0m
+[2024-11-30T03:29:34.862Z] [1m  9[0m[1m vulnerabilities ignored[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] +==============================================================================+
+[2024-11-30T03:29:34.862Z]  [1mVULNERABILITIES REPORTED[0m 
+[2024-11-30T03:29:34.862Z] +==============================================================================+
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your pylint install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m45185
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/45185/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your pylint install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m66067
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/66067/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your pylint install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m38224
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/38224/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your pylint install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m39621
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/39621/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your safety install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m42296
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/42296/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your safety install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m50749
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/50749/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your safety install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m36367
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/36367/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your safety install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m50750
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/50750/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] -> Vulnerability may be present given that your safety install specifier is >=0
+[2024-11-30T03:29:34.862Z] [1m   Vulnerability ID: [0m51358
+[2024-11-30T03:29:34.862Z] [32m[1m   This vulnerability is being ignored.[0m
+[2024-11-30T03:29:34.862Z] [1m   Reason: [0mThis vulnerability is being ignored due to the 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' flag (default True). To change this, set 'ignore-
+[2024-11-30T03:29:34.862Z]    unpinned-requirements' to False under 'security' in your policy file. See
+[2024-11-30T03:29:34.862Z]    https://docs.pyup.io/docs/safety-20-policy-file for more information.
+[2024-11-30T03:29:34.862Z] [1m   For more information about this vulnerability, visit
+[2024-11-30T03:29:34.862Z]    [0mhttps://data.safetycli.com/v/51358/97c[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] +==============================================================================+
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z]  Scan was completed. 0 vulnerabilities were reported. 9 vulnerabilities from 2 
+[2024-11-30T03:29:34.862Z]  packages were ignored. 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] +==============================================================================+[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] [33m[1m+===========================================================================================================================================================================================+[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] [31m[1mDEPRECATED: [0m[33m[1mthis command (`check`) has been DEPRECATED, and will be unsupported beyond 01 June 2024.[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] [32mWe highly encourage switching to the new [0m[32m[1m`scan`[0m[32m command which is easier to use, more powerful, and can be set up to mimic the deprecated command if required.[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] [33m[1m+===========================================================================================================================================================================================+[0m
+[2024-11-30T03:29:34.862Z] 
+[2024-11-30T03:29:34.862Z] 
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Testing)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2024-11-30T03:29:35.202Z] + echo Running Tests...
+[2024-11-30T03:29:35.202Z] Running Tests...
+[2024-11-30T03:29:35.202Z] + . test/bin/activate
+[2024-11-30T03:29:35.202Z] + deactivate nondestructive
+[2024-11-30T03:29:35.202Z] + [ -n  ]
+[2024-11-30T03:29:35.202Z] + [ -n  ]
+[2024-11-30T03:29:35.202Z] + [ -n  -o -n  ]
+[2024-11-30T03:29:35.202Z] + [ -n  ]
+[2024-11-30T03:29:35.202Z] + unset VIRTUAL_ENV
+[2024-11-30T03:29:35.202Z] + unset VIRTUAL_ENV_PROMPT
+[2024-11-30T03:29:35.202Z] + [ ! nondestructive = nondestructive ]
+[2024-11-30T03:29:35.202Z] + VIRTUAL_ENV=/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/test
+[2024-11-30T03:29:35.202Z] + export VIRTUAL_ENV
+[2024-11-30T03:29:35.202Z] + _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+[2024-11-30T03:29:35.202Z] + PATH=/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/test/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+[2024-11-30T03:29:35.202Z] + export PATH
+[2024-11-30T03:29:35.202Z] + [ -n  ]
+[2024-11-30T03:29:35.202Z] + [ -z  ]
+[2024-11-30T03:29:35.202Z] + _OLD_VIRTUAL_PS1=$ 
+[2024-11-30T03:29:35.202Z] + PS1=(test) $ 
+[2024-11-30T03:29:35.202Z] + export PS1
+[2024-11-30T03:29:35.202Z] + VIRTUAL_ENV_PROMPT=(test) 
+[2024-11-30T03:29:35.202Z] + export VIRTUAL_ENV_PROMPT
+[2024-11-30T03:29:35.202Z] + [ -n  -o -n  ]
+[2024-11-30T03:29:35.202Z] + export PYTHONPATH=:/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/python-app
+[2024-11-30T03:29:35.202Z] + chmod +x pipeline/test/test.sh
+[2024-11-30T03:29:35.202Z] + ./pipeline/test/test.sh
+[2024-11-30T03:29:35.202Z] Running tests and measuring code coverage...
+[2024-11-30T03:29:35.202Z] ***************************************************
+[2024-11-30T03:29:35.202Z]                     Test stage
+[2024-11-30T03:29:35.202Z] ***************************************************
+[2024-11-30T03:29:35.202Z] ============================= test session starts ==============================
+[2024-11-30T03:29:35.202Z] platform linux -- Python 3.10.12, pytest-8.3.3, pluggy-1.5.0
+[2024-11-30T03:29:35.202Z] rootdir: /var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master
+[2024-11-30T03:29:35.202Z] collected 1 item
+[2024-11-30T03:29:35.202Z] 
+[2024-11-30T03:29:35.202Z] python-app/test/test_app.py .                                            [100%]
+[2024-11-30T03:29:35.202Z] 
+[2024-11-30T03:29:35.202Z] ============================== 1 passed in 0.01s ===============================
+[2024-11-30T03:29:35.452Z] Name                          Stmts   Miss  Cover
+[2024-11-30T03:29:35.452Z] -------------------------------------------------
+[2024-11-30T03:29:35.452Z] python-app/src/__init__.py        0      0   100%
+[2024-11-30T03:29:35.452Z] python-app/src/app.py             4      1    75%
+[2024-11-30T03:29:35.452Z] python-app/test/test_app.py       7      1    86%
+[2024-11-30T03:29:35.452Z] -------------------------------------------------
+[2024-11-30T03:29:35.452Z] TOTAL                            11      2    82%
+[2024-11-30T03:29:35.452Z] Wrote HTML report to coverage-report/index.html
+[2024-11-30T03:29:35.452Z] cp: 'coverage-report' and '/var/lib/jenkins/workspace/python-jenkins-ci-cd-pipeline-master/coverage-report' are the same file
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2024-11-30T03:29:35.841Z] + echo Building Application...
+[2024-11-30T03:29:35.841Z] Building Application...
+[2024-11-30T03:29:35.841Z] + chmod +x pipeline/build/build.sh
+[2024-11-30T03:29:35.841Z] + ./pipeline/build/build.sh python-app:0.1.1-prod docker-registry
+[2024-11-30T03:29:35.841Z] Using TAG from environment: python-app:0.1.1-prod
+[2024-11-30T03:29:35.841Z] ***************************************************
+[2024-11-30T03:29:35.842Z]                     Build stage                                    
+[2024-11-30T03:29:35.842Z] ***************************************************
+[2024-11-30T03:29:35.842Z] Building Python application with tag: python-app:0.1.1-prod
+[2024-11-30T03:29:36.092Z] #0 building with "default" instance using docker driver
+[2024-11-30T03:29:36.092Z] 
+[2024-11-30T03:29:36.092Z] #1 [internal] load build definition from Dockerfile
+[2024-11-30T03:29:36.092Z] #1 transferring dockerfile: 157B done
+[2024-11-30T03:29:36.092Z] #1 DONE 0.0s
+[2024-11-30T03:29:36.092Z] 
+[2024-11-30T03:29:36.092Z] #2 [internal] load metadata for docker.io/library/python:3.9
+[2024-11-30T03:29:37.435Z] #2 DONE 1.6s
+[2024-11-30T03:29:37.685Z] 
+[2024-11-30T03:29:37.685Z] #3 [internal] load .dockerignore
+[2024-11-30T03:29:37.685Z] #3 transferring context: 2B done
+[2024-11-30T03:29:37.685Z] #3 DONE 0.0s
+[2024-11-30T03:29:37.685Z] 
+[2024-11-30T03:29:37.685Z] #4 [1/4] FROM docker.io/library/python:3.9@sha256:332741499f49a3f3e7749dad70e6ecf1129f00a269fdd6111da2ed2693fbe50e
+[2024-11-30T03:29:37.685Z] #4 DONE 0.0s
+[2024-11-30T03:29:37.685Z] 
+[2024-11-30T03:29:37.685Z] #5 [internal] load build context
+[2024-11-30T03:29:37.685Z] #5 transferring context: 2.34kB done
+[2024-11-30T03:29:37.685Z] #5 DONE 0.0s
+[2024-11-30T03:29:37.685Z] 
+[2024-11-30T03:29:37.685Z] #6 [2/4] WORKDIR /app
+[2024-11-30T03:29:37.685Z] #6 CACHED
+[2024-11-30T03:29:37.685Z] 
+[2024-11-30T03:29:37.685Z] #7 [3/4] COPY python-app /app
+[2024-11-30T03:29:37.935Z] #7 DONE 0.3s
+[2024-11-30T03:29:37.935Z] 
+[2024-11-30T03:29:37.935Z] #8 [4/4] RUN pip install -r requirements.txt
+[2024-11-30T03:29:39.796Z] #8 1.537 Collecting flake8
+[2024-11-30T03:29:39.796Z] #8 1.629   Downloading flake8-7.1.1-py2.py3-none-any.whl (57 kB)
+[2024-11-30T03:29:39.796Z] #8 1.652      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.7/57.7 kB 2.4 MB/s eta 0:00:00
+[2024-11-30T03:29:39.796Z] #8 1.756 Collecting pytest
+[2024-11-30T03:29:39.796Z] #8 1.775   Downloading pytest-8.3.3-py3-none-any.whl (342 kB)
+[2024-11-30T03:29:39.796Z] #8 1.812      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 342.3/342.3 kB 9.3 MB/s eta 0:00:00
+[2024-11-30T03:29:40.347Z] #8 2.446 Collecting coverage
+[2024-11-30T03:29:40.347Z] #8 2.466   Downloading coverage-7.6.8-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (234 kB)
+[2024-11-30T03:29:40.347Z] #8 2.473      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 234.5/234.5 kB 39.2 MB/s eta 0:00:00
+[2024-11-30T03:29:40.347Z] #8 2.519 Collecting lizard
+[2024-11-30T03:29:40.347Z] #8 2.547   Downloading lizard-1.17.13-py2.py3-none-any.whl (68 kB)
+[2024-11-30T03:29:40.597Z] #8 2.555      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 68.4/68.4 kB 15.4 MB/s eta 0:00:00
+[2024-11-30T03:29:40.597Z] #8 2.604 Collecting safety
+[2024-11-30T03:29:40.597Z] #8 2.623   Downloading safety-3.2.11-py3-none-any.whl (176 kB)
+[2024-11-30T03:29:40.597Z] #8 2.633      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 176.2/176.2 kB 18.6 MB/s eta 0:00:00
+[2024-11-30T03:29:40.597Z] #8 2.722 Collecting pylint
+[2024-11-30T03:29:40.848Z] #8 2.742   Downloading pylint-3.3.1-py3-none-any.whl (521 kB)
+[2024-11-30T03:29:40.848Z] #8 2.762      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 521.8/521.8 kB 28.0 MB/s eta 0:00:00
+[2024-11-30T03:29:40.848Z] #8 2.798 Collecting mccabe<0.8.0,>=0.7.0
+[2024-11-30T03:29:40.848Z] #8 2.816   Downloading mccabe-0.7.0-py2.py3-none-any.whl (7.3 kB)
+[2024-11-30T03:29:40.848Z] #8 2.857 Collecting pyflakes<3.3.0,>=3.2.0
+[2024-11-30T03:29:40.848Z] #8 2.875   Downloading pyflakes-3.2.0-py2.py3-none-any.whl (62 kB)
+[2024-11-30T03:29:40.848Z] #8 2.880      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.7/62.7 kB 21.8 MB/s eta 0:00:00
+[2024-11-30T03:29:40.848Z] #8 2.916 Collecting pycodestyle<2.13.0,>=2.12.0
+[2024-11-30T03:29:40.848Z] #8 2.934   Downloading pycodestyle-2.12.1-py2.py3-none-any.whl (31 kB)
+[2024-11-30T03:29:40.848Z] #8 2.985 Collecting pluggy<2,>=1.5
+[2024-11-30T03:29:41.098Z] #8 3.007   Downloading pluggy-1.5.0-py3-none-any.whl (20 kB)
+[2024-11-30T03:29:41.098Z] #8 3.064 Collecting exceptiongroup>=1.0.0rc8
+[2024-11-30T03:29:41.098Z] #8 3.082   Downloading exceptiongroup-1.2.2-py3-none-any.whl (16 kB)
+[2024-11-30T03:29:41.098Z] #8 3.114 Collecting iniconfig
+[2024-11-30T03:29:41.098Z] #8 3.132   Downloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+[2024-11-30T03:29:41.098Z] #8 3.179 Collecting packaging
+[2024-11-30T03:29:41.098Z] #8 3.197   Downloading packaging-24.2-py3-none-any.whl (65 kB)
+[2024-11-30T03:29:41.098Z] #8 3.202      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.5/65.5 kB 20.2 MB/s eta 0:00:00
+[2024-11-30T03:29:41.098Z] #8 3.250 Collecting tomli>=1
+[2024-11-30T03:29:41.348Z] #8 3.268   Downloading tomli-2.2.1-py3-none-any.whl (14 kB)
+[2024-11-30T03:29:41.348Z] #8 3.321 Collecting pygments
+[2024-11-30T03:29:41.348Z] #8 3.339   Downloading pygments-2.18.0-py3-none-any.whl (1.2 MB)
+[2024-11-30T03:29:41.348Z] #8 3.363      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 55.0 MB/s eta 0:00:00
+[2024-11-30T03:29:41.348Z] #8 3.413 Collecting safety-schemas>=0.0.8
+[2024-11-30T03:29:41.348Z] #8 3.431   Downloading safety_schemas-0.0.9-py3-none-any.whl (28 kB)
+[2024-11-30T03:29:41.348Z] #8 3.471 Collecting Authlib>=1.2.0
+[2024-11-30T03:29:41.599Z] #8 3.489   Downloading Authlib-1.3.2-py2.py3-none-any.whl (225 kB)
+[2024-11-30T03:29:41.599Z] #8 3.495      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 225.1/225.1 kB 56.2 MB/s eta 0:00:00
+[2024-11-30T03:29:41.599Z] #8 3.539 Collecting typing-extensions>=4.7.1
+[2024-11-30T03:29:41.599Z] #8 3.557   Downloading typing_extensions-4.12.2-py3-none-any.whl (37 kB)
+[2024-11-30T03:29:41.599Z] #8 3.600 Collecting jinja2>=3.1.0
+[2024-11-30T03:29:41.599Z] #8 3.619   Downloading jinja2-3.1.4-py3-none-any.whl (133 kB)
+[2024-11-30T03:29:41.599Z] #8 3.624      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.3/133.3 kB 35.9 MB/s eta 0:00:00
+[2024-11-30T03:29:41.599Z] #8 3.777 Collecting psutil~=6.0.0
+[2024-11-30T03:29:41.849Z] #8 3.812   Downloading psutil-6.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (290 kB)
+[2024-11-30T03:29:41.849Z] #8 3.832      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 290.5/290.5 kB 58.0 MB/s eta 0:00:00
+[2024-11-30T03:29:41.849Z] #8 3.910 Collecting marshmallow>=3.15.0
+[2024-11-30T03:29:41.849Z] #8 3.929   Downloading marshmallow-3.23.1-py3-none-any.whl (49 kB)
+[2024-11-30T03:29:41.849Z] #8 3.933      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.5/49.5 kB 14.3 MB/s eta 0:00:00
+[2024-11-30T03:29:41.849Z] #8 4.008 Collecting dparse>=0.6.4
+[2024-11-30T03:29:41.849Z] #8 4.027   Downloading dparse-0.6.4-py3-none-any.whl (11 kB)
+[2024-11-30T03:29:42.099Z] #8 4.073 Collecting Click>=8.0.2
+[2024-11-30T03:29:42.099Z] #8 4.091   Downloading click-8.1.7-py3-none-any.whl (97 kB)
+[2024-11-30T03:29:42.099Z] #8 4.096      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 29.0 MB/s eta 0:00:00
+[2024-11-30T03:29:42.099Z] #8 4.154 Collecting requests
+[2024-11-30T03:29:42.099Z] #8 4.172   Downloading requests-2.32.3-py3-none-any.whl (64 kB)
+[2024-11-30T03:29:42.099Z] #8 4.177      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.9/64.9 kB 17.1 MB/s eta 0:00:00
+[2024-11-30T03:29:42.350Z] #8 4.420 Collecting setuptools>=65.5.1
+[2024-11-30T03:29:42.600Z] #8 4.439   Downloading setuptools-75.6.0-py3-none-any.whl (1.2 MB)
+[2024-11-30T03:29:42.600Z] #8 4.450      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 126.6 MB/s eta 0:00:00
+[2024-11-30T03:29:42.600Z] #8 4.772 Collecting ruamel.yaml>=0.17.21
+[2024-11-30T03:29:42.850Z] #8 4.790   Downloading ruamel.yaml-0.18.6-py3-none-any.whl (117 kB)
+[2024-11-30T03:29:42.850Z] #8 4.795      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.8/117.8 kB 33.1 MB/s eta 0:00:00
+[2024-11-30T03:29:42.850Z] #8 4.925 Collecting rich
+[2024-11-30T03:29:43.101Z] #8 4.943   Downloading rich-13.9.4-py3-none-any.whl (242 kB)
+[2024-11-30T03:29:43.101Z] #8 4.949      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 242.4/242.4 kB 52.1 MB/s eta 0:00:00
+[2024-11-30T03:29:43.101Z] #8 5.192 Collecting pydantic>=1.10.12
+[2024-11-30T03:29:43.101Z] #8 5.211   Downloading pydantic-2.10.2-py3-none-any.whl (456 kB)
+[2024-11-30T03:29:43.101Z] #8 5.218      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 456.4/456.4 kB 82.1 MB/s eta 0:00:00
+[2024-11-30T03:29:43.101Z] #8 5.264 Collecting typer
+[2024-11-30T03:29:43.101Z] #8 5.281   Downloading typer-0.14.0-py3-none-any.whl (44 kB)
+[2024-11-30T03:29:43.101Z] #8 5.285      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.7/44.7 kB 16.5 MB/s eta 0:00:00
+[2024-11-30T03:29:43.101Z] #8 5.335 Collecting filelock~=3.12.2
+[2024-11-30T03:29:43.351Z] #8 5.354   Downloading filelock-3.12.4-py3-none-any.whl (11 kB)
+[2024-11-30T03:29:43.351Z] #8 5.423 Collecting urllib3>=1.26.5
+[2024-11-30T03:29:43.351Z] #8 5.441   Downloading urllib3-2.2.3-py3-none-any.whl (126 kB)
+[2024-11-30T03:29:43.351Z] #8 5.446      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 126.3/126.3 kB 32.7 MB/s eta 0:00:00
+[2024-11-30T03:29:43.351Z] #8 5.544 Collecting astroid<=3.4.0-dev0,>=3.3.4
+[2024-11-30T03:29:43.601Z] #8 5.563   Downloading astroid-3.3.5-py3-none-any.whl (274 kB)
+[2024-11-30T03:29:43.601Z] #8 5.570      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 274.6/274.6 kB 49.4 MB/s eta 0:00:00
+[2024-11-30T03:29:43.601Z] #8 5.626 Collecting tomlkit>=0.10.1
+[2024-11-30T03:29:43.601Z] #8 5.645   Downloading tomlkit-0.13.2-py3-none-any.whl (37 kB)
+[2024-11-30T03:29:43.601Z] #8 5.757 Collecting isort!=5.13.0,<6,>=4.2.5
+[2024-11-30T03:29:43.851Z] #8 5.775   Downloading isort-5.13.2-py3-none-any.whl (92 kB)
+[2024-11-30T03:29:43.851Z] #8 5.781      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 92.3/92.3 kB 21.4 MB/s eta 0:00:00
+[2024-11-30T03:29:43.851Z] #8 5.836 Collecting platformdirs>=2.2.0
+[2024-11-30T03:29:43.851Z] #8 5.854   Downloading platformdirs-4.3.6-py3-none-any.whl (18 kB)
+[2024-11-30T03:29:43.851Z] #8 5.893 Collecting dill>=0.2
+[2024-11-30T03:29:43.852Z] #8 5.911   Downloading dill-0.3.9-py3-none-any.whl (119 kB)
+[2024-11-30T03:29:43.852Z] #8 5.916      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 119.4/119.4 kB 34.8 MB/s eta 0:00:00
+[2024-11-30T03:29:44.102Z] #8 6.288 Collecting cryptography
+[2024-11-30T03:29:44.352Z] #8 6.306   Downloading cryptography-44.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (4.2 MB)
+[2024-11-30T03:29:44.352Z] #8 6.341      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.2/4.2 MB 126.1 MB/s eta 0:00:00
+[2024-11-30T03:29:44.352Z] #8 6.539 Collecting MarkupSafe>=2.0
+[2024-11-30T03:29:44.602Z] #8 6.557   Downloading MarkupSafe-3.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (20 kB)
+[2024-11-30T03:29:45.945Z] #8 7.932 Collecting pydantic-core==2.27.1
+[2024-11-30T03:29:45.945Z] #8 7.956   Downloading pydantic_core-2.27.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+[2024-11-30T03:29:45.945Z] #8 7.987      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 89.7 MB/s eta 0:00:00
+[2024-11-30T03:29:45.945Z] #8 8.020 Collecting annotated-types>=0.6.0
+[2024-11-30T03:29:45.945Z] #8 8.038   Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+[2024-11-30T03:29:45.945Z] #8 8.135 Collecting ruamel.yaml.clib>=0.2.7
+[2024-11-30T03:29:45.945Z] #8 8.153   Downloading ruamel.yaml.clib-0.2.12-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (724 kB)
+[2024-11-30T03:29:46.196Z] #8 8.164      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 724.9/724.9 kB 93.7 MB/s eta 0:00:00
+[2024-11-30T03:29:46.196Z] #8 8.187 Collecting pydantic>=1.10.12
+[2024-11-30T03:29:46.196Z] #8 8.205   Downloading pydantic-2.9.2-py3-none-any.whl (434 kB)
+[2024-11-30T03:29:46.196Z] #8 8.212      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 434.9/434.9 kB 80.4 MB/s eta 0:00:00
+[2024-11-30T03:29:46.196Z] #8 8.256   Downloading pydantic-2.9.1-py3-none-any.whl (434 kB)
+[2024-11-30T03:29:46.196Z] #8 8.262      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 434.4/434.4 kB 88.2 MB/s eta 0:00:00
+[2024-11-30T03:29:46.196Z] #8 8.309   Downloading pydantic-2.9.0-py3-none-any.whl (434 kB)
+[2024-11-30T03:29:46.196Z] #8 8.317      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 434.3/434.3 kB 69.1 MB/s eta 0:00:00
+[2024-11-30T03:29:46.196Z] #8 8.356   Downloading pydantic-2.8.2-py3-none-any.whl (423 kB)
+[2024-11-30T03:29:46.446Z] #8 8.362      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 423.9/423.9 kB 86.3 MB/s eta 0:00:00
+[2024-11-30T03:29:46.446Z] #8 8.400   Downloading pydantic-2.8.1-py3-none-any.whl (423 kB)
+[2024-11-30T03:29:46.446Z] #8 8.410      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 423.7/423.7 kB 52.1 MB/s eta 0:00:00
+[2024-11-30T03:29:46.446Z] #8 8.442   Downloading pydantic-2.8.0-py3-none-any.whl (423 kB)
+[2024-11-30T03:29:46.446Z] #8 8.453      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 423.1/423.1 kB 47.5 MB/s eta 0:00:00
+[2024-11-30T03:29:46.446Z] #8 8.490   Downloading pydantic-2.7.4-py3-none-any.whl (409 kB)
+[2024-11-30T03:29:46.446Z] #8 8.542      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 409.0/409.0 kB 8.0 MB/s eta 0:00:00
+[2024-11-30T03:29:46.446Z] #8 8.578   Downloading pydantic-2.7.3-py3-none-any.whl (409 kB)
+[2024-11-30T03:29:46.446Z] #8 8.585      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 409.6/409.6 kB 77.3 MB/s eta 0:00:00
+[2024-11-30T03:29:46.446Z] #8 8.615   Downloading pydantic-2.7.2-py3-none-any.whl (409 kB)
+[2024-11-30T03:29:46.696Z] #8 8.621      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 409.5/409.5 kB 85.2 MB/s eta 0:00:00
+[2024-11-30T03:29:46.696Z] #8 8.658   Downloading pydantic-2.7.1-py3-none-any.whl (409 kB)
+[2024-11-30T03:29:46.696Z] #8 8.665      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 409.3/409.3 kB 74.6 MB/s eta 0:00:00
+[2024-11-30T03:29:46.696Z] #8 8.707   Downloading pydantic-2.7.0-py3-none-any.whl (407 kB)
+[2024-11-30T03:29:46.696Z] #8 8.713      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 407.9/407.9 kB 82.4 MB/s eta 0:00:00
+[2024-11-30T03:29:46.696Z] #8 8.751   Downloading pydantic-2.6.4-py3-none-any.whl (394 kB)
+[2024-11-30T03:29:46.696Z] #8 8.758      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 394.9/394.9 kB 79.2 MB/s eta 0:00:00
+[2024-11-30T03:29:46.696Z] #8 8.795   Downloading pydantic-2.6.3-py3-none-any.whl (395 kB)
+[2024-11-30T03:29:46.696Z] #8 8.801      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 395.2/395.2 kB 86.6 MB/s eta 0:00:00
+[2024-11-30T03:29:46.696Z] #8 8.830   Downloading pydantic-2.6.2-py3-none-any.whl (394 kB)
+[2024-11-30T03:29:46.696Z] #8 8.837      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 394.9/394.9 kB 79.5 MB/s eta 0:00:00
+[2024-11-30T03:29:46.696Z] #8 8.866   Downloading pydantic-2.6.1-py3-none-any.whl (394 kB)
+[2024-11-30T03:29:46.947Z] #8 8.873      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 394.8/394.8 kB 84.1 MB/s eta 0:00:00
+[2024-11-30T03:29:46.947Z] #8 8.909   Downloading pydantic-2.6.0-py3-none-any.whl (394 kB)
+[2024-11-30T03:29:46.947Z] #8 8.916      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 394.2/394.2 kB 79.8 MB/s eta 0:00:00
+[2024-11-30T03:29:46.947Z] #8 8.928 INFO: pip is looking at multiple versions of safety-schemas to determine which version is compatible with other requirements. This could take a while.
+[2024-11-30T03:29:46.947Z] #8 8.933 Collecting safety-schemas>=0.0.8
+[2024-11-30T03:29:46.947Z] #8 8.952   Downloading safety_schemas-0.0.8-py3-none-any.whl (28 kB)
+[2024-11-30T03:29:46.947Z] #8 8.977 Collecting pydantic>=1.10.12
+[2024-11-30T03:29:46.947Z] #8 8.995   Downloading pydantic-2.5.3-py3-none-any.whl (381 kB)
+[2024-11-30T03:29:46.947Z] #8 9.002      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 381.9/381.9 kB 76.1 MB/s eta 0:00:00
+[2024-11-30T03:29:46.947Z] #8 9.043   Downloading pydantic-2.5.2-py3-none-any.whl (381 kB)
+[2024-11-30T03:29:46.947Z] #8 9.050      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 381.9/381.9 kB 75.2 MB/s eta 0:00:00
+[2024-11-30T03:29:46.947Z] #8 9.088   Downloading pydantic-2.5.1-py3-none-any.whl (381 kB)
+[2024-11-30T03:29:47.197Z] #8 9.157      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 381.6/381.6 kB 5.6 MB/s eta 0:00:00
+[2024-11-30T03:29:47.197Z] #8 9.194   Downloading pydantic-2.5.0-py3-none-any.whl (407 kB)
+[2024-11-30T03:29:47.197Z] #8 9.203      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 407.5/407.5 kB 63.0 MB/s eta 0:00:00
+[2024-11-30T03:29:47.197Z] #8 9.219 INFO: pip is looking at multiple versions of ruamel-yaml to determine which version is compatible with other requirements. This could take a while.
+[2024-11-30T03:29:47.197Z] #8 9.224 Collecting ruamel.yaml>=0.17.21
+[2024-11-30T03:29:47.197Z] #8 9.243   Downloading ruamel.yaml-0.18.5-py3-none-any.whl (116 kB)
+[2024-11-30T03:29:47.197Z] #8 9.248      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 116.4/116.4 kB 35.7 MB/s eta 0:00:00
+[2024-11-30T03:29:47.197Z] #8 9.315   Downloading ruamel.yaml-0.18.3-py3-none-any.whl (114 kB)
+[2024-11-30T03:29:47.197Z] #8 9.321      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 114.7/114.7 kB 33.2 MB/s eta 0:00:00
+[2024-11-30T03:29:47.197Z] #8 9.387   Downloading ruamel.yaml-0.18.2-py3-none-any.whl (113 kB)
+[2024-11-30T03:29:47.197Z] #8 9.393      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.7/113.7 kB 29.2 MB/s eta 0:00:00
+[2024-11-30T03:29:47.197Z] #8 9.434 INFO: pip is looking at multiple versions of safety-schemas to determine which version is compatible with other requirements. This could take a while.
+[2024-11-30T03:29:47.447Z] #8 9.459   Downloading ruamel.yaml-0.18.1-py3-none-any.whl (113 kB)
+[2024-11-30T03:29:47.447Z] #8 9.468      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.5/113.5 kB 14.6 MB/s eta 0:00:00
+[2024-11-30T03:29:47.447Z] #8 9.534   Downloading ruamel.yaml-0.18.0-py3-none-any.whl (113 kB)
+[2024-11-30T03:29:47.447Z] #8 9.540      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.4/113.4 kB 26.9 MB/s eta 0:00:00
+[2024-11-30T03:29:47.447Z] #8 9.605   Downloading ruamel.yaml-0.17.40-py3-none-any.whl (113 kB)
+[2024-11-30T03:29:47.447Z] #8 9.610      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.7/113.7 kB 28.7 MB/s eta 0:00:00
+[2024-11-30T03:29:47.447Z] #8 9.642 INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+[2024-11-30T03:29:47.698Z] #8 9.676   Downloading ruamel.yaml-0.17.39-py3-none-any.whl (113 kB)
+[2024-11-30T03:29:47.698Z] #8 9.681      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.2/113.2 kB 32.7 MB/s eta 0:00:00
+[2024-11-30T03:29:47.698Z] #8 9.725 INFO: pip is looking at multiple versions of ruamel-yaml to determine which version is compatible with other requirements. This could take a while.
+[2024-11-30T03:29:47.698Z] #8 9.749   Downloading ruamel.yaml-0.17.38-py3-none-any.whl (113 kB)
+[2024-11-30T03:29:47.698Z] #8 9.755      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.2/113.2 kB 30.4 MB/s eta 0:00:00
+[2024-11-30T03:29:47.698Z] #8 9.822   Downloading ruamel.yaml-0.17.36-py3-none-any.whl (106 kB)
+[2024-11-30T03:29:47.698Z] #8 9.828      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.9/106.9 kB 23.7 MB/s eta 0:00:00
+[2024-11-30T03:29:47.698Z] #8 9.893   Downloading ruamel.yaml-0.17.35-py3-none-any.whl (112 kB)
+[2024-11-30T03:29:47.948Z] #8 9.913      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.9/112.9 kB 5.8 MB/s eta 0:00:00
+[2024-11-30T03:29:47.948Z] #8 9.983   Downloading ruamel.yaml-0.17.34-py3-none-any.whl (112 kB)
+[2024-11-30T03:29:47.948Z] #8 9.988      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.6/112.6 kB 35.5 MB/s eta 0:00:00
+[2024-11-30T03:29:47.948Z] #8 10.05   Downloading ruamel.yaml-0.17.33-py3-none-any.whl (112 kB)
+[2024-11-30T03:29:48.198Z] #8 10.06      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.3/112.3 kB 29.2 MB/s eta 0:00:00
+[2024-11-30T03:29:48.198Z] #8 10.10 INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+[2024-11-30T03:29:48.198Z] #8 10.12   Downloading ruamel.yaml-0.17.32-py3-none-any.whl (112 kB)
+[2024-11-30T03:29:48.198Z] #8 10.13      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.2/112.2 kB 30.8 MB/s eta 0:00:00
+[2024-11-30T03:29:48.198Z] #8 10.19   Downloading ruamel.yaml-0.17.31-py3-none-any.whl (112 kB)
+[2024-11-30T03:29:48.198Z] #8 10.20      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.1/112.1 kB 33.9 MB/s eta 0:00:00
+[2024-11-30T03:29:48.198Z] #8 10.27   Downloading ruamel.yaml-0.17.30-py3-none-any.whl (111 kB)
+[2024-11-30T03:29:48.198Z] #8 10.28      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 111.9/111.9 kB 15.9 MB/s eta 0:00:00
+[2024-11-30T03:29:48.198Z] #8 10.34   Downloading ruamel.yaml-0.17.29-py3-none-any.whl (111 kB)
+[2024-11-30T03:29:48.449Z] #8 10.35      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 111.9/111.9 kB 23.8 MB/s eta 0:00:00
+[2024-11-30T03:29:48.449Z] #8 10.41   Downloading ruamel.yaml-0.17.28-py3-none-any.whl (109 kB)
+[2024-11-30T03:29:48.449Z] #8 10.42      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.6/109.6 kB 29.4 MB/s eta 0:00:00
+[2024-11-30T03:29:48.449Z] #8 10.49   Downloading ruamel.yaml-0.17.27-py3-none-any.whl (109 kB)
+[2024-11-30T03:29:48.449Z] #8 10.49      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.5/109.5 kB 28.9 MB/s eta 0:00:00
+[2024-11-30T03:29:48.449Z] #8 10.56   Downloading ruamel.yaml-0.17.26-py3-none-any.whl (109 kB)
+[2024-11-30T03:29:48.449Z] #8 10.56      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.1/109.1 kB 33.4 MB/s eta 0:00:00
+[2024-11-30T03:29:48.449Z] #8 10.63   Downloading ruamel.yaml-0.17.25-py3-none-any.whl (109 kB)
+[2024-11-30T03:29:48.699Z] #8 10.64      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.1/109.1 kB 28.9 MB/s eta 0:00:00
+[2024-11-30T03:29:48.699Z] #8 10.71   Downloading ruamel.yaml-0.17.24-py3-none-any.whl (109 kB)
+[2024-11-30T03:29:48.699Z] #8 10.71      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.0/109.0 kB 36.9 MB/s eta 0:00:00
+[2024-11-30T03:29:48.699Z] #8 10.78   Downloading ruamel.yaml-0.17.23-py3-none-any.whl (108 kB)
+[2024-11-30T03:29:48.699Z] #8 10.79      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.4/108.4 kB 9.3 MB/s eta 0:00:00
+[2024-11-30T03:29:48.699Z] #8 10.86   Downloading ruamel.yaml-0.17.22-py3-none-any.whl (107 kB)
+[2024-11-30T03:29:48.699Z] #8 10.87      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 107.8/107.8 kB 34.2 MB/s eta 0:00:00
+[2024-11-30T03:29:48.699Z] #8 10.94   Downloading ruamel.yaml-0.17.21-py3-none-any.whl (109 kB)
+[2024-11-30T03:29:48.949Z] #8 10.94      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.5/109.5 kB 29.3 MB/s eta 0:00:00
+[2024-11-30T03:29:48.949Z] #8 10.98 INFO: pip is looking at multiple versions of pyflakes to determine which version is compatible with other requirements. This could take a while.
+[2024-11-30T03:29:48.949Z] #8 10.98 INFO: pip is looking at multiple versions of pydantic-core to determine which version is compatible with other requirements. This could take a while.
+[2024-11-30T03:29:48.949Z] #8 10.98 INFO: pip is looking at multiple versions of pydantic to determine which version is compatible with other requirements. This could take a while.
+[2024-11-30T03:29:48.949Z] #8 10.99 Collecting pydantic>=1.10.12
+[2024-11-30T03:29:48.949Z] #8 11.02   Downloading pydantic-2.10.1-py3-none-any.whl (455 kB)
+[2024-11-30T03:29:48.949Z] #8 11.04      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 455.3/455.3 kB 89.8 MB/s eta 0:00:00
+[2024-11-30T03:29:49.860Z] #8 12.03   Downloading pydantic-2.10.0-py3-none-any.whl (454 kB)
+[2024-11-30T03:29:50.110Z] #8 12.05      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 454.3/454.3 kB 88.8 MB/s eta 0:00:00
+[2024-11-30T03:29:50.110Z] #8 12.08 Collecting pydantic-core==2.27.0
+[2024-11-30T03:29:50.110Z] #8 12.12   Downloading pydantic_core-2.27.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+[2024-11-30T03:29:50.110Z] #8 12.17      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 118.8 MB/s eta 0:00:00
+[2024-11-30T03:29:51.021Z] #8 13.22 Collecting pydantic-core==2.23.4
+[2024-11-30T03:29:51.271Z] #8 13.24   Downloading pydantic_core-2.23.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+[2024-11-30T03:29:51.271Z] #8 13.28      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 53.8 MB/s eta 0:00:00
+[2024-11-30T03:29:51.271Z] #8 13.38 Collecting idna<4,>=2.5
+[2024-11-30T03:29:51.271Z] #8 13.39   Downloading idna-3.10-py3-none-any.whl (70 kB)
+[2024-11-30T03:29:51.271Z] #8 13.40      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 17.4 MB/s eta 0:00:00
+[2024-11-30T03:29:51.271Z] #8 13.45 Collecting certifi>=2017.4.17
+[2024-11-30T03:29:51.271Z] #8 13.47   Downloading certifi-2024.8.30-py3-none-any.whl (167 kB)
+[2024-11-30T03:29:51.522Z] #8 13.48      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 167.3/167.3 kB 41.4 MB/s eta 0:00:00
+[2024-11-30T03:29:51.522Z] #8 13.64 Collecting charset-normalizer<4,>=2
+[2024-11-30T03:29:51.522Z] #8 13.66   Downloading charset_normalizer-3.4.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (144 kB)
+[2024-11-30T03:29:51.522Z] #8 13.66      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 144.9/144.9 kB 37.3 MB/s eta 0:00:00
+[2024-11-30T03:29:51.522Z] #8 13.72 Collecting markdown-it-py>=2.2.0
+[2024-11-30T03:29:51.522Z] #8 13.74   Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+[2024-11-30T03:29:51.772Z] #8 13.75      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 87.5/87.5 kB 27.6 MB/s eta 0:00:00
+[2024-11-30T03:29:51.772Z] #8 13.81 Collecting shellingham>=1.3.0
+[2024-11-30T03:29:51.772Z] #8 13.83   Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+[2024-11-30T03:29:51.772Z] #8 13.91 Collecting mdurl~=0.1
+[2024-11-30T03:29:52.022Z] #8 13.92   Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+[2024-11-30T03:29:52.022Z] #8 14.20 Collecting cffi>=1.12
+[2024-11-30T03:29:52.273Z] #8 14.22   Downloading cffi-1.17.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (445 kB)
+[2024-11-30T03:29:52.273Z] #8 14.23      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 445.2/445.2 kB 77.8 MB/s eta 0:00:00
+[2024-11-30T03:29:52.273Z] #8 14.26 Collecting pycparser
+[2024-11-30T03:29:52.273Z] #8 14.28   Downloading pycparser-2.22-py3-none-any.whl (117 kB)
+[2024-11-30T03:29:52.273Z] #8 14.29      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.6/117.6 kB 36.3 MB/s eta 0:00:00
+[2024-11-30T03:29:52.523Z] #8 14.63 Installing collected packages: urllib3, typing-extensions, tomlkit, tomli, shellingham, setuptools, ruamel.yaml.clib, pygments, pyflakes, pycparser, pycodestyle, psutil, pluggy, platformdirs, packaging, mdurl, mccabe, MarkupSafe, isort, iniconfig, idna, filelock, exceptiongroup, dill, coverage, Click, charset-normalizer, certifi, annotated-types, ruamel.yaml, requests, pytest, pydantic-core, marshmallow, markdown-it-py, lizard, jinja2, flake8, dparse, cffi, astroid, rich, pylint, pydantic, cryptography, typer, safety-schemas, Authlib, safety
+[2024-11-30T03:29:52.523Z] #8 14.76   Attempting uninstall: setuptools
+[2024-11-30T03:29:52.773Z] #8 14.76     Found existing installation: setuptools 58.1.0
+[2024-11-30T03:29:52.773Z] #8 14.80     Uninstalling setuptools-58.1.0:
+[2024-11-30T03:29:52.773Z] #8 14.82       Successfully uninstalled setuptools-58.1.0
+[2024-11-30T03:29:56.895Z] #8 18.61 Successfully installed Authlib-1.3.2 Click-8.1.7 MarkupSafe-3.0.2 annotated-types-0.7.0 astroid-3.3.5 certifi-2024.8.30 cffi-1.17.1 charset-normalizer-3.4.0 coverage-7.6.8 cryptography-44.0.0 dill-0.3.9 dparse-0.6.4 exceptiongroup-1.2.2 filelock-3.12.4 flake8-7.1.1 idna-3.10 iniconfig-2.0.0 isort-5.13.2 jinja2-3.1.4 lizard-1.17.13 markdown-it-py-3.0.0 marshmallow-3.23.1 mccabe-0.7.0 mdurl-0.1.2 packaging-24.2 platformdirs-4.3.6 pluggy-1.5.0 psutil-6.0.0 pycodestyle-2.12.1 pycparser-2.22 pydantic-2.9.2 pydantic-core-2.23.4 pyflakes-3.2.0 pygments-2.18.0 pylint-3.3.1 pytest-8.3.3 requests-2.32.3 rich-13.9.4 ruamel.yaml-0.18.6 ruamel.yaml.clib-0.2.12 safety-3.2.11 safety-schemas-0.0.9 setuptools-75.6.0 shellingham-1.5.4 tomli-2.2.1 tomlkit-0.13.2 typer-0.14.0 typing-extensions-4.12.2 urllib3-2.2.3
+[2024-11-30T03:29:56.895Z] #8 18.61 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[2024-11-30T03:29:56.895Z] #8 18.75 
+[2024-11-30T03:29:56.895Z] #8 18.75 [notice] A new release of pip is available: 23.0.1 -> 24.3.1
+[2024-11-30T03:29:56.895Z] #8 18.75 [notice] To update, run: pip install --upgrade pip
+[2024-11-30T03:29:57.145Z] #8 DONE 19.3s
+[2024-11-30T03:29:57.396Z] 
+[2024-11-30T03:29:57.396Z] #9 exporting to image
+[2024-11-30T03:29:57.396Z] #9 exporting layers
+[2024-11-30T03:29:57.646Z] #9 exporting layers 0.4s done
+[2024-11-30T03:29:57.646Z] #9 writing image sha256:303af0f87ee9746e78765362f17ad3854ef25fdd1aa5802b4ecfdebb087ac104 done
+[2024-11-30T03:29:57.646Z] #9 naming to docker.io/library/python-app:0.1.1-prod done
+[2024-11-30T03:29:57.646Z] #9 DONE 0.5s
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to Registry)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2024-11-30T03:29:57.984Z] + echo Pushing Docker Image to Registry...
+[2024-11-30T03:29:57.984Z] Pushing Docker Image to Registry...
+[2024-11-30T03:29:57.984Z] + chmod +x pipeline/push/push.sh
+[2024-11-30T03:29:57.984Z] + ./pipeline/push/push.sh python-app:0.1.1-prod docker-registry
+[2024-11-30T03:29:57.984Z] Using TAG from environment: python-app:0.1.1-prod
+[2024-11-30T03:29:57.984Z] Using REGISTRY from environment: docker-registry
+[2024-11-30T03:29:57.984Z] ***************************************************
+[2024-11-30T03:29:57.984Z]                   Push stage
+[2024-11-30T03:29:57.984Z] ***************************************************
+[2024-11-30T03:29:57.984Z] Pushing Docker image to private registry...
+[2024-11-30T03:29:57.984Z] The push refers to repository [docker-registry:5000/python-app]
+[2024-11-30T03:29:57.984Z] 1bddf5fdb19e: Preparing
+[2024-11-30T03:29:57.984Z] 6e67502d8c4b: Preparing
+[2024-11-30T03:29:57.984Z] f066b0212711: Preparing
+[2024-11-30T03:29:57.984Z] 6f48ad948751: Preparing
+[2024-11-30T03:29:57.984Z] 1354cd991b1c: Preparing
+[2024-11-30T03:29:57.984Z] 68fff311c877: Preparing
+[2024-11-30T03:29:57.984Z] 96d99c63b722: Preparing
+[2024-11-30T03:29:57.984Z] 00547dd240c4: Preparing
+[2024-11-30T03:29:57.984Z] b6ca42156b9f: Preparing
+[2024-11-30T03:29:57.984Z] 24b5ce0f1e07: Preparing
+[2024-11-30T03:29:57.984Z] 68fff311c877: Waiting
+[2024-11-30T03:29:57.984Z] b6ca42156b9f: Waiting
+[2024-11-30T03:29:57.984Z] 96d99c63b722: Waiting
+[2024-11-30T03:29:57.984Z] 00547dd240c4: Waiting
+[2024-11-30T03:29:57.984Z] 24b5ce0f1e07: Waiting
+[2024-11-30T03:29:57.984Z] 6f48ad948751: Layer already exists
+[2024-11-30T03:29:57.984Z] 1354cd991b1c: Layer already exists
+[2024-11-30T03:29:57.984Z] f066b0212711: Layer already exists
+[2024-11-30T03:29:57.984Z] 96d99c63b722: Layer already exists
+[2024-11-30T03:29:57.984Z] 68fff311c877: Layer already exists
+[2024-11-30T03:29:57.984Z] 00547dd240c4: Layer already exists
+[2024-11-30T03:29:57.984Z] 24b5ce0f1e07: Layer already exists
+[2024-11-30T03:29:57.984Z] b6ca42156b9f: Layer already exists
+[2024-11-30T03:29:57.984Z] 6e67502d8c4b: Pushed
+[2024-11-30T03:30:02.106Z] 1bddf5fdb19e: Pushed
+[2024-11-30T03:30:02.106Z] 0.1.1-prod: digest: sha256:3c0f5b005732fc5c4117a4434f9fec052686299705b8ba6b2eed341cc04a89e2 size: 2422
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2024-11-30T03:30:02.454Z] + echo Deploying Application...
+[2024-11-30T03:30:02.454Z] Deploying Application...
+[2024-11-30T03:30:02.454Z] + chmod +x pipeline/deploy/deploy.sh
+[2024-11-30T03:30:02.454Z] + ./pipeline/deploy/deploy.sh python-app:0.1.1-prod docker-registry
+[2024-11-30T03:30:02.454Z] Using TAG from environment: python-app:0.1.1-prod
+[2024-11-30T03:30:02.454Z] Using REGISTRY from environment: docker-registry
+[2024-11-30T03:30:02.454Z] ***************************************************
+[2024-11-30T03:30:02.454Z]                     Deploy stage
+[2024-11-30T03:30:02.454Z] ***************************************************
+[2024-11-30T03:30:02.454Z] Deploying Python application...
+[2024-11-30T03:30:02.454Z] 7c1d8089fda6babd9426eea24403295a3a5e4e5e38cb42c4f4176582586a272b
+[2024-11-30T03:30:02.454Z] Running container with name as python-app-0-1-1-prod
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+[2024-11-30T03:30:02.529Z] Sending status via email
+[Pipeline] mail
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
