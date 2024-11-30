@@ -1,7 +1,7 @@
 # python-jenkins-ci-pipeline
 Python Jenkins CI-CD
 
-#Currently working on Develop branch
+#Main branch
 Installed jenkins, private registry
 
 # Directory structure
@@ -36,5 +36,5 @@ python-jenkins-ci-pipeline/
 10 directories, 14 files
 
 ```
-# Currently work is in process in develop branch 
-# When all testing will be done then will be merged with main branch
+# Currently work is in process in main branch
+# Documentation and all things are left 

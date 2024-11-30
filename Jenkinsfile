@@ -5,7 +5,7 @@ pipeline {
     agent any
     environment {
        
-        ENV_TYPE = "develop"
+        ENV_TYPE = "prod"
         PROJECT = "python-app"
        
         VENV_DIR = "test"
